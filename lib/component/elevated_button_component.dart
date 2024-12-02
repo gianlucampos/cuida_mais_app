@@ -1,4 +1,3 @@
-import 'package:cuida_mais_app/core/app_colors.dart';
 import 'package:flutter/material.dart';
 
 Center elevatedButton(

@@ -1,5 +1,5 @@
+import 'package:cuida_mais_app/pages/login/login_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:cuida_mais_app/pages/login/login_page.dart';
 
 void main() {
   runApp(const MainApp());
@@ -10,9 +10,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: LoginPage()
-    );
+    return const MaterialApp(
+        debugShowCheckedModeBanner: false, home: LoginPage());
   }
 }
