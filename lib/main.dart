@@ -1,4 +1,4 @@
-import 'package:cuida_mais_app/pages/login/login_screen.dart';
+import 'package:cuida_mais_app/pages/login/login_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {

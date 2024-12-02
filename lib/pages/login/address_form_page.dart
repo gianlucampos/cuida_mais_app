@@ -1,6 +1,6 @@
 import 'package:cuida_mais_app/component/app_bar_component.dart';
 import 'package:cuida_mais_app/component/elevated_button_component.dart';
-import 'package:cuida_mais_app/pages/login/login_screen.dart';
+import 'package:cuida_mais_app/pages/login/login_page.dart';
 import 'package:flutter/material.dart';
 
 //TODO usar api de CEP dos correios pra já preencher automaticamente
