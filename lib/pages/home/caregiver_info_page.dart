@@ -1,3 +1,4 @@
+import 'package:cuida_mais_app/component/app_bar_component.dart';
 import 'package:flutter/material.dart';
 
 class CaregiverInfoPage extends StatelessWidget {
@@ -6,9 +7,7 @@ class CaregiverInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Informações do cuidador'),
-      ),
+      appBar: appBar('Informações do cuidador'),
       body: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
         child: Column(

@@ -12,7 +12,7 @@ Center elevatedButton(
       child: ElevatedButton(
         style: ButtonStyle(
           backgroundColor:
-              WidgetStateProperty.all<Color>(AppColors.greenSecondary),
+              WidgetStateProperty.all<Color>(Colors.blueAccent),
           shape: WidgetStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),

@@ -1,6 +1,7 @@
+import 'package:cuida_mais_app/component/elevated_button_component.dart';
 import 'package:cuida_mais_app/component/input_text_component.dart';
 import 'package:cuida_mais_app/pages/home/home_page.dart';
-import 'package:cuida_mais_app/pages/login/create_account_page.dart';
+import 'package:cuida_mais_app/pages/login/account_form_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
@@ -48,24 +49,18 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
             ),
-            ElevatedButton(
-              child: const Text('Entrar'),
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const HomePage()),
-              ),
-            ),
-            ElevatedButton(
-              child: const Text('Não tenho uma conta!'),
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => CreateAccountPage()),
-              ),
-            ),
+            elevatedButton(
+                label: 'Entrar',
+                onPressedAction: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const HomePage()))),
+            const SizedBox(height: 20),
+            elevatedButton(
+                label: 'Não tenho uma conta!',
+                onPressedAction: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const AccountFormPage()))),
           ],
         ),
       ),
-
     );
   }
 }
