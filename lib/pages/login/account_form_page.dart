@@ -1,6 +1,7 @@
 import 'package:cuida_mais_app/component/app_bar_component.dart';
 import 'package:cuida_mais_app/component/elevated_button_component.dart';
 import 'package:cuida_mais_app/pages/login/address_form_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class AccountFormPage extends StatefulWidget {
@@ -12,7 +13,7 @@ class AccountFormPage extends StatefulWidget {
 
 class AccountFormPageState extends State<AccountFormPage> {
   final _formKey = GlobalKey<FormState>();
-
+  final _auth = FirebaseAuth.instance;
   // Controladores para os campos do formulário
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _birthDateController = TextEditingController();
@@ -98,8 +99,9 @@ class AccountFormPageState extends State<AccountFormPage> {
     );
   }
 
-  void onSave(BuildContext context) {
+  void onSave(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
+      await _auth.createUserWithEmailAndPassword(email: _emailController.text, password: _passwordController.text);
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const AddressFormPage()));
     }

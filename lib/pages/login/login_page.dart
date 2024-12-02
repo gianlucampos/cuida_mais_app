@@ -1,5 +1,6 @@
 import 'package:cuida_mais_app/pages/home/home_page.dart';
 import 'package:cuida_mais_app/pages/login/account_form_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -10,10 +11,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginPageState extends State<LoginPage> {
+  final _auth = FirebaseAuth.instance;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool _isPasswordVisible = false;
+  String _loginMessage = '';
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +52,8 @@ class LoginPageState extends State<LoginPage> {
             const SizedBox(height: 40),
             Expanded(
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
@@ -126,11 +130,7 @@ class LoginPageState extends State<LoginPage> {
                         ),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Login realizado com sucesso!')),
-                            );
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => const HomePage()));
+                            _login();
                           }
                         },
                         child: const Text(
@@ -145,8 +145,11 @@ class LoginPageState extends State<LoginPage> {
                           const Text('Não tem uma conta?'),
                           TextButton(
                             onPressed: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) => const AccountFormPage()));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const AccountFormPage()));
                             },
                             child: const Text('Cadastre-se'),
                           ),
@@ -168,5 +171,27 @@ class LoginPageState extends State<LoginPage> {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  Future<void> _login() async {
+    try {
+      await _auth.signInWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const HomePage()),
+      );
+      _loginMessage = 'Login realizado com sucesso!';
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        print(e.message);
+        _loginMessage = 'Erro ao fazer login! Verifique suas credenciais';
+      });
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(_loginMessage)),
+    );
   }
 }
